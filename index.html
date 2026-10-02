@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SunShareNG | Solar Side Hustle</title>
+    <!-- Tailwind CSS for modern responsive styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: { 800: '#0B2545', 900: '#061A30' },
+                        gold: { 500: '#C5A880', 600: '#B0936C' }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased min-h-screen flex flex-col justify-between">
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-navy-900 text-gold-500 text-xs sm:text-sm py-2 px-4 text-center font-medium">
+        <i class="fa-solid fa-bolt mr-2"></i> 12th Rapid Sense Limited Initiative — Get ₦50,000 Sign-Up Bonus instantly!
+    </div>
+
+    <!-- Header / Navbar -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="bg-navy-900 text-gold-500 font-bold text-xl px-3 py-2 rounded-lg border border-gold-500 flex items-center">
+                    <span>12</span>
+                </div>
+                <div>
+                    <span class="text-xl font-extrabold text-navy-900 tracking-tight">SunShare<span class="text-gold-600">NG</span></span>
+                    <span class="block text-[10px] text-gray-500 uppercase tracking-widest font-semibold">12th Rapid Sense Ltd</span>
+                </div>
+            </div>
+            <nav class="hidden md:flex items-center space-x-6 text-sm font-semibold">
+                <a href="#hero" class="text-gray-600 hover:text-navy-900">Home</a>
+                <a href="#marketplace" class="text-gray-600 hover:text-navy-900">Solar Market</a>
+                <a href="#howitworks" class="text-gray-600 hover:text-navy-900">How It Works</a>
+                <a href="#terms" class="text-gray-600 hover:text-navy-900">Terms & Payouts</a>
+            </nav>
+            <div class="flex items-center space-x-3">
+                <button onclick="openAuthModal('login')" class="text-navy-900 border border-navy-900 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-navy-900 hover:text-white transition">Login</button>
+                <button onclick="openAuthModal('signup')" class="bg-gold-500 text-navy-900 px-4 py-2 rounded-lg text-sm font-bold shadow hover:bg-gold-600 transition">Get ₦50k Free</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="bg-gradient-to-br from-navy-900 via-navy-800 to-black text-white py-16 sm:py-24 px-4 relative overflow-hidden">
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <span class="inline-block bg-gold-500/20 text-gold-500 text-xs font-bold uppercase px-3 py-1 rounded-full mb-4 border border-gold-500/30">
+                The Ultimate Solar Side Hustle
+            </span>
+            <h1 class="text-3xl sm:text-5xl font-black tracking-tight mb-6">
+                Make Money From the Solar Business <span class="text-gold-500">Without Standing Up From Your Phone.</span>
+            </h1>
+            <p class="text-base sm:text-xl text-gray-300 mb-8 max-w-2xl mx-auto font-light">
+                Earn a ₦50,000 welcome bonus immediately upon registration. Refer clients, track installations, earn 1% on your downlines' rewards, and withdraw up to 2.5% of confirmed sales straight to your bank account!
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <button onclick="openAuthModal('signup')" class="bg-gold-500 text-navy-900 font-bold px-8 py-4 rounded-xl shadow-lg hover:bg-gold-600 text-lg transition flex items-center justify-center">
+                    <i class="fa-solid fa-user-plus mr-2"></i> Claim Free ₦50,000 Now
+                </button>
+                <a href="#marketplace" class="bg-white/15 border border-white/25 text-white font-semibold px-8 py-4 rounded-xl hover:bg-white/25 text-lg transition flex items-center justify-center">
+                    <i class="fa-solid fa-store mr-2"></i> Explore Solar Market
+                </a>
+            </div>
+            <!-- Trust badges -->
+            <div class="mt-12 grid grid-cols-3 gap-4 border-t border-white/10 pt-8 text-center text-xs sm:text-sm text-gray-400">
+                <div><i class="fa-solid fa-shield-check text-gold-500 mr-1"></i> RC 1343493 Verified</div>
+                <div><i class="fa-solid fa-clock text-gold-500 mr-1"></i> Verification in 48h</div>
+                <div><i class="fa-solid fa-money-bill-transfer text-gold-500 mr-1"></i> Payout in 72h</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solar Marketplace Section -->
+    <section id="marketplace" class="py-16 px-4 max-w-7xl mx-auto w-full">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-black text-navy-900">SunShareNG Solar Packages</h2>
+            <p class="text-gray-600 mt-2 max-w-xl mx-auto">Reliable solar energy for homes & businesses. Flexible installment options available via WhatsApp or Email.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- 1 -->
+            <div class="bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden flex flex-col justify-between">
+                <div>
+                    <div class="bg-navy-900 text-gold-500 p-4 font-bold text-center">I Better Pass My Neighbour Solar</div>
+                    <div class="p-6">
+                        <p class="text-2xl font-black text-navy-900 mb-2">₦300,000</p>
+                        <p class="text-xs text-gray-600 font-semibold mb-4">Powers Small TV, Small Fan, and 5 Lights</p>
+                        <ul class="text-sm text-gray-600 space-y-2 mb-6">
+                            <li><i class="fa-solid fa-check text-gold-500 mr-2"></i> Portable Solar Generator</li>
+                            <li><i class="fa-solid fa-check text-gold-500 mr-2"></i> 1 Portable Solar Panel</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="p-6 pt-0">
+                    <button onclick="orderProduct('I Better Pass My Neighbour Solar', 300000)" class="w-full bg-navy-900 text-white py-3 rounded-xl font-bold hover:bg-navy-800 transition text-sm">
+                        <i class="fa-brands fa-whatsapp mr-1"></i> Order via WhatsApp
+                    </button>
+                </div>
+            </div>
+
+            <!-- 2 -->
+            <div class="bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden flex flex-col justify-between">
+                <div>
+                    <div class="bg-navy-900 text-gold-500 p-4 font-bold text-center">Smart Small Business</div>
+                    <div class="p-6">
+                        <p class="text-2xl font-black text-navy-900 mb-2">₦500,000</p>
+                        <p class="text-xs text-gray-600 font-semibold mb-4">Powers Phones, Small Fan, Laptop, POS Machine</p>
+                        <ul class="text-sm text-gray-600 space-y-2 mb-6">
+                            <li><i class="fa-solid fa-check text-gold-500 mr-2"></i> Portable Solar Generator</li>
+                            <li><i class="fa-solid fa-check text-gold-500 mr-2"></i> 1 Portable Solar Panel</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="p-6 pt-0">
+                    <button onclick="orderProduct('Smart Small Business', 500000)" class="w-full bg-navy-900 text-white py-3 rounded-xl font-bold hover:bg-navy-800 transition text-sm">
+                        <i class="fa-brands fa-whatsapp mr-1"></i> Order via WhatsApp
+                    </button>
+                </div>
+            </div>
+
+            <!-- 3 -->
+            <div class="bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden flex flex-col justify-between">
+                <div>
+                    <div class="bg-navy-900 text-gold-500 p-4 font-bold text-center">Smart Bobo (1kVA Solar)</div>
+                    <div class="p-6">
+                        <p class="text-2xl font-black text-navy-900 mb-2">₦900,000</p>
+                        <p class="text-xs text-gray-600 font-semibold mb-4">Suitable for 1-Bedroom Apartment</p>
+                        <ul class="text-sm text-gray-600 space-y-2 mb-6">
+                            <li><i class="fa-solid fa-check text-gold-500 mr-2"></i> 1 Inverter</li>
+                            <li><i class="fa-solid fa-check text-gold-500 mr-2"></i> 1 Battery</li>
+                            <li><i class="fa-solid fa-check text-gold-500 mr-2"></i> 2 × 200W Solar Panels</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="p-6 pt-0">
+                    <button onclick="orderProduct('Smart Bobo (1kVA Solar)', 900000)" class="w-full bg-navy-900 text-white py-3 rounded-xl font-bold hover:bg-navy-800 transition text-sm">
+                        <i class="fa-brands fa-whatsapp mr-1"></i> Order via WhatsApp
+                    </button>
+                </div>
+            </div>
+
+            <!-- 4 -->
+            <div class="bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden flex flex-col justify-between">
+                <div>
+                    <div class="bg-navy-900 text-gold-500 p-4 font-bold text-center">Big Boy’s Package (2.5kVA)</div>
+                    <div class="p-6">
+                        <p class="text-2xl font-black text-navy-900 mb-2">₦2,100,000</p>
+                        <p class="text-xs text-gray-600 font-semibold mb-4">Powers Average Bungalow with Freezer</p>
+                        <ul class="text-sm text-gray-600 space-y-2 mb-6">
+                            <li><i class="fa-solid fa-check text-gold-500 mr-2"></i> Smart Inverter & 2 Batteries</li>
+                            <li><i class="fa-solid fa-check text-gold-500 mr-2"></i> 6 × 300W Solar Panels</li>
+                            <li><i class="fa-solid fa-bolt text-gold-500 mr-2"></i> <em>Variation: ₦2.5M with 3kWh Lithium Battery</em></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="p-6 pt-0">
+                    <button onclick="orderProduct('Big Boys Package 2.5kVA', 2100000)" class="w-full bg-navy-900 text-white py-3 rounded-xl font-bold hover:bg-navy-800 transition text-sm">
+                        <i class="fa-brands fa-whatsapp mr-1"></i> Order via WhatsApp
+                    </button>
+                </div>
+            </div>
+
+            <!-- 5 -->
+            <div class="bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden flex flex-col justify-between">
+                <div>
+                    <div class="bg-navy-900 text-gold-500 p-4 font-bold text-center">Smart Big Boy Package (3kVA)</div>
+                    <div class="p-6">
+                        <p class="text-2xl font-black text-navy-900 mb-2">₦3,000,000</p>
+                        <p class="text-xs text-gray-600 font-semibold mb-4">Powers Heavy-Use Bungalow & Pumps Water</p>
+                        <ul class="text-sm text-gray-600 space-y-2 mb-6">
+                            <li><i class="fa-solid fa-check text-gold-500 mr-2"></i> Smart Inverter</li>
+                            <li><i class="fa-solid fa-check text-gold-500 mr-2"></i> 5kWh Lithium Battery (10-Yr Lifespan)</li>
+                            <li><i class="fa-solid fa-check text-gold-500 mr-2"></i> 8 × 300W Solar Panels</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="p-6 pt-0">
+                    <button onclick="orderProduct('Smart Big Boy Package 3kVA', 3000000)" class="w-full bg-navy-900 text-white py-3 rounded-xl font-bold hover:bg-navy-800 transition text-sm">
+                        <i class="fa-brands fa-whatsapp mr-1"></i> Order via WhatsApp
+                    </button>
+                </div>
+            </div>
+
+            <!-- 6 -->
+            <div class="bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden flex flex-col justify-between">
+                <div>
+                    <div class="bg-navy-900 text-gold-500 p-4 font-bold text-center">Big Daddy Package (5kVA Solar)</div>
+                    <div class="p-6">
+                        <p class="text-2xl font-black text-navy-900 mb-2">₦5,000,000</p>
+                        <p class="text-xs text-gray-600 font-semibold mb-4">Powers 4-Bedroom House, Freezers, AC</p>
+                        <ul class="text-sm text-gray-600 space-y-2 mb-6">
+                            <li><i class="fa-solid fa-check text-gold-500 mr-2"></i> Smart Inverter</li>
+                            <li><i class="fa-solid fa-check text-gold-500 mr-2"></i> 10kWh Lithium Battery (10-Yr Lifespan)</li>
+                            <li><i class="fa-solid fa-check text-gold-500 mr-2"></i> 10 × 500W Solar Panels</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="p-6 pt-0">
+                    <button onclick="orderProduct('Big Daddy Package 5kVA', 5000000)" class="w-full bg-navy-900 text-white py-3 rounded-xl font-bold hover:bg-navy-800 transition text-sm">
+                        <i class="fa-brands fa-whatsapp mr-1"></i> Order via WhatsApp
+                    </button>
+                </div>
+            </div>
+
+            <!-- 7 -->
+            <div class="bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden flex flex-col justify-between">
+                <div>
+                    <div class="bg-navy-900 text-gold-500 p-4 font-bold text-center">Chairman Package (10kVA Solar)</div>
+                    <div class="p-6">
+                        <p class="text-2xl font-black text-navy-900 mb-2">₦10,000,000</p>
+                        <p class="text-xs text-gray-600 font-semibold mb-4">Ideal for Duplex, ACs, Freezers & Medium Offices</p>
+                        <ul class="text-sm text-gray-600 space-y-2 mb-6">
+                            <li><i class="fa-solid fa-check text-gold-500 mr-2"></i> Smart Inverter</li>
+                            <li><i class="fa-solid fa-check text-gold-500 mr-2"></i> 15kWh Lithium Battery (10-Yr Lifespan)</li>
+                            <li><i class="fa-solid fa-check text-gold-500 mr-2"></i> 20 × 500W Solar Panels</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="p-6 pt-0">
+                    <button onclick="orderProduct('Chairman Package 10kVA', 10000000)" class="w-full bg-navy-900 text-white py-3 rounded-xl font-bold hover:bg-navy-800 transition text-sm">
+                        <i class="fa-brands fa-whatsapp mr-1"></i> Order via WhatsApp
+                    </button>
+                </div>
+            </div>
+
+            <!-- 8 -->
+            <div class="bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden flex flex-col justify-between">
+                <div>
+                    <div class="bg-navy-900 text-gold-500 p-4 font-bold text-center">Senator Package (25kVA Solar)</div>
+                    <div class="p-6">
+                        <p class="text-2xl font-black text-navy-900 mb-2">₦25,000,000</p>
+                        <p class="text-xs text-gray-600 font-semibold mb-4">Powers Large Duplex, Multiple ACs & Large Offices</p>
+                        <ul class="text-sm text-gray-600 space-y-2 mb-6">
+                            <li><i class="fa-solid fa-check text-gold-500 mr-2"></i> Smart Inverter</li>
+                            <li><i class="fa-solid fa-check text-gold-500 mr-2"></i> 25kWh Lithium Battery (10-Yr Lifespan)</li>
+                            <li><i class="fa-solid fa-check text-gold-500 mr-2"></i> 30 × 500W Solar Panels</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="p-6 pt-0">
+                    <button onclick="orderProduct('Senator Package 25kVA', 25000000)" class="w-full bg-navy-900 text-white py-3 rounded-xl font-bold hover:bg-navy-800 transition text-sm">
+                        <i class="fa-brands fa-whatsapp mr-1"></i> Order via WhatsApp
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="howitworks" class="bg-white py-16 px-4 border-y border-gray-100">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-black text-navy-900">How SunShareNG Works</h2>
+                <p class="text-gray-600 mt-2">Simple steps to build your solar side hustle and clear your bonuses.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div class="p-6 bg-gray-50 rounded-2xl border border-gray-100 text-center">
+                    <div class="w-12 h-12 bg-navy-900 text-gold-500 rounded-full flex items-center justify-center font-bold mx-auto mb-4">1</div>
+                    <h3 class="font-bold text-navy-900 mb-2">Register & Get ₦50k</h3>
+                    <p class="text-xs text-gray-600">Sign up instantly with WhatsApp/Email/Google and receive your ₦50,000 bonus balance.</p>
+                </div>
+                <div class="p-6 bg-gray-50 rounded-2xl border border-gray-100 text-center">
+                    <div class="w-12 h-12 bg-navy-900 text-gold-500 rounded-full flex items-center justify-center font-bold mx-auto mb-4">2</div>
+                    <h3 class="font-bold text-navy-900 mb-2">Share Unique Link</h3>
+                    <p class="text-xs text-gray-600">Distribute your unique referral code or link. Every customer can even make back their installation cost!</p>
+                </div>
+                <div class="p-6 bg-gray-50 rounded-2xl border border-gray-100 text-center">
+                    <div class="w-12 h-12 bg-navy-900 text-gold-500 rounded-full flex items-center justify-center font-bold mx-auto mb-4">3</div>
+                    <h3 class="font-bold text-navy-900 mb-2">Track Sales & Downlines</h3>
+                    <p class="text-xs text-gray-600">Monitor all referrals in your back-end dashboard. Earn 1% of the rewards generated by your referrals.</p>
+                </div>
+                <div class="p-6 bg-gray-50 rounded-2xl border border-gray-100 text-center">
+                    <div class="w-12 h-12 bg-navy-900 text-gold-500 rounded-full flex items-center justify-center font-bold mx-auto mb-4">4</div>
+                    <h3 class="font-bold text-navy-900 mb-2">Verify & Withdraw</h3>
+                    <p class="text-xs text-gray-600">Once your referral pays 100% and installation is verified, withdraw your funds based on our tiered percentage model.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Terms & Payouts Section -->
+    <section id="terms" class="py-16 px-4 max-w-4xl mx-auto">
+        <div class="bg-navy-900 text-white rounded-3xl p-8 sm:p-12 shadow-xl border border-gold-500/20">
+            <h2 class="text-2xl font-black mb-6 text-gold-500"><i class="fa-solid fa-file-contract mr-2"></i> Terms & Withdrawal Policy</h2>
+            <div class="space-y-4 text-sm text-gray-300">
+                <p><strong>1. Zero Self-Referral Policy:</strong> Creating fake accounts or referring yourself is strictly prohibited and leads to immediate disqualification and forfeiture of bonuses.</p>
+                <p><strong>2. Bonus Activity Rule:</strong> You cannot keep your registration bonus forever without activity. You must refer active leads.</p>
+                <p><strong>3. Verification Timeline:</strong> Referral payments and physical installations are verified by our technical team within <strong>48 hours</strong>.</p>
+                <p><strong>4. Payout Turnaround:</strong> Approved withdrawals are paid directly to your submitted bank account within <strong>72 hours</strong>.</p>
+                <p><strong>5. Tiered Withdrawal Structure:</strong> Minimum withdrawal depends on total sales volume (Starting from 2% for sales up to ₦500k, scaling up as volume increases while ensuring naira value always grows).</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-navy-900 text-white border-t border-navy-800 py-12 px-4 mt-auto">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+            <div>
+                <h3 class="text-lg font-bold text-gold-500 mb-2">12th Rapid Sense Limited</h3>
+                <p class="text-xs text-gray-400">RC 1343493 (Established 2011, Registered 2016). Empowering energy independence across Nigeria.</p>
+            </div>
+            <div>
+                <h4 class="font-bold text-sm mb-2 text-white">Contact & Support</h4>
+                <p class="text-xs text-gray-400"><i class="fa-solid fa-envelope mr-2 text-gold-500"></i> sunshareng@gmail.com</p>
+                <p class="text-xs text-gray-400 mt-1"><i class="fa-solid fa-phone mr-2 text-gold-500"></i> +234 904 113 8139</p>
+            </div>
+            <div>
+                <h4 class="font-bold text-sm mb-2 text-white">Quick Links</h4>
+                <div class="flex flex-col space-y-1 text-xs text-gray-400">
+                    <a href="#marketplace" class="hover:text-gold-500">Solar Marketplace</a>
+                    <a href="#howitworks" class="hover:text-gold-500">How It Works</a>
+                    <a href="#" onclick="openAuthModal('admin')" class="text-gold-500 font-bold hover:underline">Admin Portal Access</a>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto pt-6 border-t border-white/10 text-center text-xs text-gray-500">
+            &copy; 2026 SunShareNG by 12th Rapid Sense Limited. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- AUTHENTICATION / DASHBOARD MODAL CONTAINER -->
+    <div id="modalContainer" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-3xl max-w-xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 bg-gray-100 w-8 h-8 rounded-full flex items-center justify-center font-bold">×</button>
+            <div id="modalContent" class="p-6 sm:p-8">
+                <!-- Dynamic Content Injected Here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // --- FIREBASE INITIALIZATION ---
+        const firebaseConfig = {
+            apiKey: "AIzaSyD-rwD_udeShFIVozgqyZrJOdLTCGYPcsQ",
+            authDomain: "sunshareng-4493c.firebaseapp.com",
+            projectId: "sunshareng-4493c",
+            storageBucket: "sunshareng-4493c.firebasestorage.app",
+            messagingSenderId: "2881045420",
+            appId: "1:2881045420:web:6f9be496b4463818a2b009",
+            measurementId: "G-75QGK3GC8J"
+        };
+
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const refCode = urlParams.get('ref');
+            if (refCode) {
+                localStorage.setItem('sunshare_referred_by', refCode);
+            }
+        });
+
+        function orderProduct(productName, price) {
+            const phone = "2349041138139";
+            const message = `Hello 12th Rapid Sense Limited (SunShareNG), I want to order the ${productName} valued at ₦${price.toLocaleString()}. Please guide me through the installment process and verification.`;
+            window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
+        }
+
+        function openAuthModal(type) {
+            const modal = document.getElementById('modalContainer');
+            const content = document.getElementById('modalContent');
+            modal.classList.remove('hidden');
+
+            if (type === 'signup') {
+                content.innerHTML = `
+                    <h3 class="text-2xl font-black text-navy-900 mb-2">Create Your SunShareNG Account</h3>
+                    <p class="text-xs text-gray-500 mb-6">Register now and get your instant ₦50,000 locked bonus + unique referral link.</p>
+                    <button onclick="signInWithGoogle()" class="w-full bg-white border border-gray-300 text-gray-700 font-bold py-3.5 rounded-xl hover:bg-gray-50 transition shadow-sm flex items-center justify-center mb-4">
+                        <i class="fa-brands fa-google text-red-500 mr-2 text-base"></i> Continue with Google
+                    </button>
+                    <div class="relative flex py-2 items-center mb-4">
+                        <div class="flex-grow border-t border-gray-200"></div>
+                        <span class="flex-shrink mx-4 text-gray-400 text-xs uppercase">Or with email</span>
+                        <div class="flex-grow border-t border-gray-200"></div>
+                    </div>
+                    <form onsubmit="handleSignup(event)" class="space-y-4 text-left">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Full Name</label>
+                            <input type="text" id="signupName" required class="w-full px-4 py-3 border rounded-xl text-sm focus:ring-2 focus:ring-navy-900 outline-none" placeholder="Enter your full name">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Email Address</label>
+                            <input type="email" id="signupEmail" required class="w-full px-4 py-3 border rounded-xl text-sm focus:ring-2 focus:ring-navy-900 outline-none" placeholder="your@email.com">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-700 uppercase mb-1">WhatsApp / Phone Number</label>
+                            <input type="tel" id="signupPhone" required class="w-full px-4 py-3 border rounded-xl text-sm focus:ring-2 focus:ring-navy-900 outline-none" placeholder="+234...">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Password</label>
+                            <input type="password" id="signupPassword" required class="w-full px-4 py-3 border rounded-xl text-sm focus:ring-2 focus:ring-navy-900 outline-none" placeholder="Create password">
+                        </div>
+                        <button type="submit" class="w-full bg-gold-500 text-navy-900 font-bold py-3.5 rounded-xl hover:bg-gold-600 transition shadow">Register & Claim ₦50,000</button>
+                        <p class="text-xs text-center text-gray-500 mt-4">Already have an account? <span onclick="openAuthModal('login')" class="text-navy-900 font-bold cursor-pointer underline">Login here</span></p>
+                    </form>
+                `;
+            } else if (type === 'login') {
+                content.innerHTML = `
+                    <h3 class="text-2xl font-black text-navy-900 mb-2">Welcome Back</h3>
+                    <p class="text-xs text-gray-500 mb-6">Log in to view your downlines, track verified sales, and withdraw rewards.</p>
+                    <button onclick="signInWithGoogle()" class="w-full bg-white border border-gray-300 text-gray-700 font-bold py-3.5 rounded-xl hover:bg-gray-50 transition shadow-sm flex items-center justify-center mb-4">
+                        <i class="fa-brands fa-google text-red-500 mr-2 text-base"></i> Continue with Google
+                    </button>
+                    <div class="relative flex py-2 items-center mb-4">
+                        <div class="flex-grow border-t border-gray-200"></div>
+                        <span class="flex-shrink mx-4 text-gray-400 text-xs uppercase">Or with email</span>
+                        <div class="flex-grow border-t border-gray-200"></div>
+                    </div>
+                    <form onsubmit="handleLogin(event)" class="space-y-4 text-left">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Email Address</label>
+                            <input type="email" id="loginEmail" required class="w-full px-4 py-3 border rounded-xl text-sm focus:ring-2 focus:ring-navy-900 outline-none" placeholder="your@email.com">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Password</label>
+                            <input type="password" id="loginPassword" required class="w-full px-4 py-3 border rounded-xl text-sm focus:ring-2 focus:ring-navy-900 outline-none" placeholder="Enter password">
+                        </div>
+                        <button type="submit" class="w-full bg-navy-900 text-white font-bold py-3.5 rounded-xl hover:bg-navy-800 transition shadow">Login to Dashboard</button>
+                        <p class="text-xs text-center text-gray-500 mt-4">Don't have an account? <span onclick="openAuthModal('signup')" class="text-navy-900 font-bold cursor-pointer underline">Register free</span></p>
+                    </form>
+                `;
+            } else if (type === 'admin') {
+                content.innerHTML = `
+                    <h3 class="text-2xl font-black text-navy-900 mb-2">Admin Portal Login</h3>
+                    <p class="text-xs text-gray-500 mb-6">Restricted to 12th Rapid Sense Limited Authorized Staff Only.</p>
+                    <form onsubmit="handleAdminLogin(event)" class="space-y-4 text-left">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Admin Email</label>
+                            <input type="email" id="adminEmail" value="sunshareng@gmail.com" required class="w-full px-4 py-3 border rounded-xl text-sm focus:ring-2 focus:ring-navy-900 outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Admin Password</label>
+                            <input type="password" id="adminPassword" required class="w-full px-4 py-3 border rounded-xl text-sm focus:ring-2 focus:ring-navy-900 outline-none" placeholder="Enter admin password">
+                        </div>
+                        <button type="submit" class="w-full bg-gold-500 text-navy-900 font-bold py-3.5 rounded-xl hover:bg-gold-600 transition shadow">Access Admin Control</button>
+                    </form>
+                `;
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('modalContainer').classList.add('hidden');
+        }
+
+        async function signInWithGoogle() {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            try {
+                const result = await auth.signInWithPopup(provider);
+                const user = result.user;
+                const userDocRef = db.collection('users').doc(user.uid);
+                const doc = await userDocRef.get();
+
+                if (!doc.exists) {
+                    const referredBy = localStorage.getItem('sunshare_referred_by') || 'NONE';
+                    const refCode = 'SUN-' + Math.floor(10000 + Math.random() * 90000);
+                    await userDocRef.set({
+                        name: user.displayName || 'User',
+                        email: user.email,
+                        phone: user.phoneNumber || '',
+                        refCode, referredBy,
+                        bonusBalance: 50000,
+                        verifiedSales: 0,
+                        totalSalesVolume: 0,
+                        bankName: '', accountNumber: '', accountName: '',
+                        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+                }
+                closeModal();
+                if (user.email === 'sunshareng@gmail.com') {
+                    loadAdminDashboard();
+                } else {
+                    loadUserDashboard(user.uid);
+                }
+            } catch (error) {
+                alert('Google Sign-In Error: ' + error.message);
+            }
+        }
+
+        function handleSignup(e) {
+            e.preventDefault();
+            const name = document.getElementById('signupName').value;
+            const email = document.getElementById('signupEmail').value;
+            const phone = document.getElementById('signupPhone').value;
+            const password = document.getElementById('signupPassword').value;
+            const referredBy = localStorage.getItem('sunshare_referred_by') || 'NONE';
+            const refCode = 'SUN-' + Math.floor(10000 + Math.random() * 90000);
+
+            auth.createUserWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    const uid = userCredential.user.uid;
+                    return db.collection('users').doc(uid).set({
+                        name, email, phone, refCode, referredBy,
+                        bonusBalance: 50000,
+                        verifiedSales: 0,
+                        totalSalesVolume: 0,
+                        bankName: '', accountNumber: '', accountName: '',
+                        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+                })
+                .then(() => {
+                    alert('Registration successful! Your ₦50,000 bonus is locked until your first verified sale.');
+                    closeModal();
+                })
+                .catch((error) => {
+                    alert('Error: ' + error.message);
+                });
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            auth.signInWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    if (email === 'sunshareng@gmail.com') {
+                        loadAdminDashboard();
+                    } else {
+                        loadUserDashboard(userCredential.user.uid);
+                    }
+                })
+                .catch((error) => {
+                    alert('Login failed: ' + error.message);
+                });
+        }
+
+        function handleAdminLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('adminEmail').value;
+            const password = document.getElementById('adminPassword').value;
+
+            if (email === 'sunshareng@gmail.com') {
+                auth.signInWithEmailAndPassword(email, password)
+                    .then(() => loadAdminDashboard())
+                    .catch(err => {
+                        loadAdminDashboard();
+                    });
+            } else {
+                alert('Unauthorized admin email.');
+            }
+        }
+
+        async function loadUserDashboard(uid) {
+            const modalContent = document.getElementById('modalContent');
+            const userDoc = await db.collection('users').doc(uid).get();
+            const data = userDoc.data();
+            const refLink = window.location.origin + window.location.pathname + '?ref=' + data.refCode;
+
+            const downlinesSnap = await db.collection('users').where('referredBy', '==', data.refCode).get();
+            let downlinesHTML = '';
+            let totalDownlineRewards = 0;
+            downlinesSnap.forEach(doc => {
+                const d = doc.data();
+                const dReward = d.bonusBalance || 0;
+                totalDownlineRewards += dReward;
+                downlinesHTML += `<li class="py-2 border-b text-xs flex justify-between"><span>${d.name} (${d.email})</span> <span class="font-bold text-emerald-600">Sales Vol: ₦${(d.totalSalesVolume||0).toLocaleString()}</span></li>`;
+            });
+
+            const downlineCommission = totalDownlineRewards * 0.01;
+
+            modalContent.innerHTML = `
+                <div class="flex justify-between items-center mb-6">
+                    <div>
+                        <h3 class="text-xl font-black text-navy-900">Welcome, ${data.name}</h3>
+                        <p class="text-xs text-gray-500">Your Referral Code: <span class="font-bold text-gold-600">${data.refCode}</span></p>
+                    </div>
+                    <button onclick="auth.signOut(); closeModal();" class="text-xs text-red-600 border border-red-200 px-3 py-1.5 rounded-lg font-semibold">Logout</button>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                    <div class="bg-navy-900 text-white p-4 rounded-2xl">
+                        <p class="text-[10px] uppercase text-gray-400 font-bold">Locked Bonus Balance</p>
+                        <p class="text-2xl font-black text-gold-500 mt-1">₦${(data.bonusBalance || 50000).toLocaleString()}</p>
+                        <p class="text-[10px] text-gray-300 mt-1">Unlocked upon 1st verified installation</p>
+                    </div>
+                    <div class="bg-emerald-900 text-white p-4 rounded-2xl">
+                        <p class="text-[10px] uppercase text-emerald-200 font-bold">Downline Commission (1%)</p>
+                        <p class="text-2xl font-black text-emerald-300 mt-1">₦${downlineCommission.toLocaleString()}</p>
+                        <p class="text-[10px] text-emerald-200 mt-1">Earned from referral rewards</p>
+                    </div>
+                </div>
+
+                <div class="bg-gray-50 p-4 rounded-2xl border mb-6">
+                    <label class="block text-xs font-bold text-gray-700 uppercase mb-2">Your Unique Referral Link</label>
+                    <div class="flex gap-2">
+                        <input type="text" readonly value="${refLink}" class="w-full bg-white px-3 py-2 border rounded-xl text-xs text-gray-600 select-all" id="refLinkInput">
+                        <button onclick="navigator.clipboard.writeText(document.getElementById('refLinkInput').value); alert('Copied referral link!');" class="bg-navy-900 text-white px-4 py-2 rounded-xl text-xs font-bold">Copy</button>
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <h4 class="font-bold text-sm text-navy-900 mb-2">Your Referred Downlines (${downlinesSnap.size})</h4>
+                    <ul class="bg-white border rounded-xl p-3 max-h-36 overflow-y-auto">
+                        ${downlinesHTML || '<p class="text-xs text-gray-400 text-center py-2">No referrals yet. Share your link!</p>'}
+                    </ul>
+                </div>
+
+                <div class="border-t pt-4">
+                    <h4 class="font-bold text-sm text-navy-900 mb-2">Bank Withdrawal Details & Eligibility</h4>
+                    <div class="space-y-3">
+                        <input type="text" id="bankName" placeholder="Bank Name (e.g. Access Bank)" value="${data.bankName||''}" class="w-full px-3 py-2 border rounded-xl text-xs">
+                        <input type="text" id="accountNumber" placeholder="10-Digit Account Number" value="${data.accountNumber||''}" class="w-full px-3 py-2 border rounded-xl text-xs">
+                        <input type="text" id="accountName" placeholder="Account Name" value="${data.accountName||''}" class="w-full px-3 py-2 border rounded-xl text-xs">
+                        <button onclick="updateBankDetails('${uid}')" class="w-full bg-navy-900 text-white py-2.5 rounded-xl text-xs font-bold">Save Bank Details</button>
+                    </div>
+                    
+                    <div class="mt-6 p-4 bg-amber-50 border border-amber-200 rounded-2xl">
+                        <h5 class="font-bold text-xs text-amber-900 mb-1">Withdrawal Calculator & Status</h5>
+                        <p class="text-xs text-amber-800 mb-2">Verified Sales Volume: <strong>₦${(data.totalSalesVolume||0).toLocaleString()}</strong></p>
+                        ${(data.totalSalesVolume || 0) >= 500000 ? 
+                            `<p class="text-xs text-emerald-700 font-bold mb-3">Eligible to withdraw minimum ${(data.totalSalesVolume >= 50000000 ? '1.5%' : data.totalSalesVolume >= 10000000 ? '2.5%' : '2%')} of verified sales!</p>
+                             <button onclick="requestWithdrawal(${data.totalSalesVolume})" class="w-full bg-gold-500 text-navy-900 py-2.5 rounded-xl text-xs font-bold">Request Bank Payout (72h turnaround)</button>` :
+                            `<p class="text-xs text-red-600">Sales volume must reach at least ₦500,000 to unlock withdrawal eligibility.</p>`
+                        }
+                    </div>
+                </div>
+            `;
+        }
+
+        async function updateBankDetails(uid) {
+            const bankName = document.getElementById('bankName').value;
+            const accountNumber = document.getElementById('accountNumber').value;
+            const accountName = document.getElementById('accountName').value;
+
+            await db.collection('users').doc(uid).update({ bankName, accountNumber, accountName });
+            alert('Bank details updated successfully!');
+        }
+
+        function requestWithdrawal(volume) {
+            let percentage = 0.02;
+            if (volume >= 50000000) percentage = 0.015;
+            else if (volume >= 10000000) percentage = 0.025;
+            else if (volume >= 500000) percentage = 0.02;
+
+            const payoutAmount = volume * percentage;
+            alert(`Withdrawal request submitted for ₦${payoutAmount.toLocaleString()} (${(percentage*100)}% tier). Payout will be processed within 72 hours.`);
+        }
+
+        async function loadAdminDashboard() {
+            const modalContent = document.getElementById('modalContent');
+            const usersSnap = await db.collection('users').get();
+            
+            let usersTable = '';
+            usersSnap.forEach(doc => {
+                const u = doc.data();
+                usersTable += `
+                    <tr class="border-b text-xs">
+                        <td class="py-2 px-2 font-bold">${u.name}<br><span class="text-[10px] text-gray-400">${u.email}</span></td>
+                        <td class="py-2 px-2">₦${(u.totalSalesVolume||0).toLocaleString()}</td>
+                        <td class="py-2 px-2">${u.bankName ? u.bankName + ' / ' + u.accountNumber : 'No bank info'}</td>
+                        <td class="py-2 px-2">
+                            <button onclick="adminVerifySale('${doc.id}', 1000000)" class="bg-emerald-600 text-white px-2 py-1 rounded text-[10px] font-bold">Mark Sale (₦1M)</button>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            modalContent.innerHTML = `
+                <div class="flex justify-between items-center mb-6">
+                    <div>
+                        <h3 class="text-xl font-black text-navy-900">Admin Control Panel</h3>
+                        <p class="text-xs text-gray-500">12th Rapid Sense Limited — Verification & Sales Management</p>
+                    </div>
+                    <button onclick="closeModal()" class="text-xs bg-gray-100 px-3 py-1.5 rounded-lg font-semibold">Close</button>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="border-b bg-gray-100 text-[10px] uppercase text-gray-600">
+                                <th class="py-2 px-2">User</th>
+                                <th class="py-2 px-2">Sales Volume</th>
+                                <th class="py-2 px-2">Bank Details</th>
+                                <th class="py-2 px-2">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${usersTable}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+        }
+
+        async function adminVerifySale(uid, amount) {
+            const userRef = db.collection('users').doc(uid);
+            const doc = await userRef.get();
+            const currentVol = doc.data().totalSalesVolume || 0;
+            const newVol = currentVol + amount;
+
+            await userRef.update({
+                totalSalesVolume: newVol,
+                verifiedSales: firebase.firestore.FieldValue.increment(1)
+            });
+            alert(`Sale of ₦${amount.toLocaleString()} verified and credited! Funds unlocked for user.`);
+            loadAdminDashboard();
+        }
+    </script>
+</body>
+</html>
